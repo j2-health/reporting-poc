@@ -1,0 +1,33 @@
+.pie-chart-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chart-header {
+  margin-bottom: 15px;
+}
+
+.member-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+.member-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.member-stat-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.member-stat-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+} 
