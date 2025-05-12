@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@highcharts/map-collection": "^2.3.0"
+  }
+}

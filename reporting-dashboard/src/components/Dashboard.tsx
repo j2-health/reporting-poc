@@ -59,7 +59,7 @@ const Dashboard: React.FC = () => {
             percentageWithoutAccess={memberData.percentageWithoutAccess}
           />
         </div>
-        <div className="dashboard-column">
+        <div className="dashboard-column map-column">
           <MemberAccessMap />
         </div>
       </div>

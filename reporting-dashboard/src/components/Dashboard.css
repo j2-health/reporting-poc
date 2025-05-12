@@ -78,6 +78,13 @@
   padding: 20px;
 }
 
+/* Specific styles for the map column */
+.dashboard-column.map-column {
+  height: 450px;
+  padding: 0;
+  overflow: hidden;
+}
+
 .detail-item {
   display: flex;
   flex-direction: column;

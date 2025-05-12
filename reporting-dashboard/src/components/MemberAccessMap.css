@@ -1,6 +1,9 @@
 .map-container {
   height: 100%;
-  min-height: 300px;
+  min-height: 400px;
+  background-color: transparent;
+  border-radius: 4px;
+  position: relative;
 }
 
 /* Override Highcharts map navigation buttons */
@@ -11,11 +14,56 @@
 }
 
 .highcharts-map-navigation .highcharts-button {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 3px;
   border: 1px solid #ccc;
+  transition: background-color 0.2s ease;
 }
 
 .highcharts-map-navigation .highcharts-button:hover {
   background-color: white;
+}
+
+/* Make sure the scatter points display properly */
+.highcharts-point {
+  fill-opacity: 0.85;
+  stroke-width: 0;
+}
+
+/* Make the triangles more visible */
+.highcharts-series-2 .highcharts-point {
+  fill-opacity: 1;
+}
+
+.highcharts-legend-item-hidden {
+  opacity: 0.3;
+}
+
+/* Improve the appearance of the map */
+.highcharts-background {
+  fill: transparent;
+}
+
+/* Style the legend */
+.highcharts-legend-item text {
+  font-weight: normal !important;
+  font-size: 12px;
+}
+
+/* Style the axis labels */
+.highcharts-axis-labels text {
+  fill: #666;
+  font-size: 11px;
+}
+
+/* Style the tooltip */
+.highcharts-tooltip {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.highcharts-tooltip-box {
+  fill: white;
+  stroke: #ced4da;
+  stroke-width: 1;
+  border-radius: 4px;
 } 
