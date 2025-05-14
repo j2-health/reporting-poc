@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import './MemberAccessMap.css';
@@ -29,6 +29,22 @@ const generateRandomPoints = (numPoints: number, withAccess: boolean): LocationP
 };
 
 const MemberAccessMap: React.FC = () => {
+  // Create a ref for the chart
+  const chartRef = useRef<HighchartsReact.RefObject>(null);
+  
+  // Effect to disable animations after the chart is rendered
+  useEffect(() => {
+    if (chartRef.current && chartRef.current.chart) {
+      console.log("Directly disabling animations on map chart");
+      
+      // Force any animations to complete immediately
+      chartRef.current.chart.renderer.globalAnimation = false;
+      
+      // Redraw without animations
+      chartRef.current.chart.redraw(false);
+    }
+  }, []);
+  
   // Generate dummy data for the map
   const membersWithAccess = generateRandomPoints(300, true);
   const membersWithoutAccess = generateRandomPoints(15, false);
@@ -153,7 +169,15 @@ const MemberAccessMap: React.FC = () => {
     chart: {
       type: 'scatter',
       height: 400,
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      animation: false,          // Explicitly disable animations
+      reflow: false,             // Disable reflow animations
+      events: {
+        load: function() {
+          console.log("Map chart loaded - no animations");
+          // No redraw call
+        }
+      }
     },
     title: {
       text: ''
@@ -169,7 +193,8 @@ const MemberAccessMap: React.FC = () => {
         text: null
       },
       tickLength: 0,
-      lineWidth: 0
+      lineWidth: 0,
+      animation: false        // Disable x-axis animations
     },
     yAxis: {
       min: 33.5,
@@ -182,10 +207,12 @@ const MemberAccessMap: React.FC = () => {
         text: null
       },
       tickLength: 0,
-      lineWidth: 0
+      lineWidth: 0,
+      animation: false        // Disable y-axis animations
     },
     tooltip: {
-      pointFormat: '{point.name}'
+      pointFormat: '{point.name}',
+      animation: false        // Disable tooltip animations
     },
     legend: {
       enabled: true,
@@ -198,8 +225,18 @@ const MemberAccessMap: React.FC = () => {
     },
     plotOptions: {
       scatter: {
+        animation: false,     // Disable scatter plot animations
         marker: {
           radius: 3
+        },
+        enableMouseTracking: false
+      },
+      series: {
+        animation: false,     // Disable all series animations
+        states: {
+          hover: {
+            enabled: false    // Disable hover state
+          }
         }
       }
     },
@@ -209,13 +246,15 @@ const MemberAccessMap: React.FC = () => {
         name: 'With',
         data: withAccessPoints,
         color: '#192f59',
-        zIndex: 2
+        zIndex: 2,
+        animation: false      // Disable animation for this specific series
       },
       {
         name: 'Without',
         data: withoutAccessPoints,
         color: '#e74c3c',
-        zIndex: 3
+        zIndex: 3,
+        animation: false      // Disable animation for this specific series
       }
     ],
     credits: {
@@ -228,6 +267,7 @@ const MemberAccessMap: React.FC = () => {
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
+        ref={chartRef}
       />
     </div>
   );
