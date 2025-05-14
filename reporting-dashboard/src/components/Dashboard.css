@@ -4,6 +4,19 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  /* PDF optimization styles */
+  page-break-inside: avoid;
+  break-inside: avoid;
+  max-height: none !important;
+  overflow: visible !important;
+  /* Scale content to fit on one page */
+  transform: scale(0.95);
+  transform-origin: top left;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .dashboard-header {
@@ -55,7 +68,7 @@
   background-color: #f0f0f0;
   padding: 10px 20px;
   border-left: 5px solid #2c3e50;
-  margin: 20px 0 10px 0;
+  margin: 10px 0; /* Reduced margin for better PDF fit */
 }
 
 .section-header h2 {
@@ -68,6 +81,9 @@
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
+  /* PDF optimization styles */
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .dashboard-column {
@@ -76,6 +92,9 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  /* PDF optimization styles */
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 /* Specific styles for the map column */
@@ -83,6 +102,14 @@
   height: 450px;
   padding: 0;
   overflow: hidden;
+}
+
+/* Chart containers - prevent page breaks */
+.boxplot-container, 
+.pie-chart-container, 
+.map-container {
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .detail-item {
@@ -175,49 +202,4 @@
   width: 50px;
   height: 1px;
   background-color: #333;
-}
-
-/* Print-specific styles to ensure the dashboard fits on a single page */
-@media print {
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .dashboard-container {
-    /* Prevent page breaks within the dashboard */
-    page-break-inside: avoid;
-    break-inside: avoid;
-    /* Remove any height constraints */
-    max-height: none !important;
-    overflow: visible !important;
-    /* Scale down slightly to fit more content */
-    transform: scale(0.9);
-    transform-origin: top left;
-  }
-  
-  /* Prevent page breaks within dashboard sections */
-  .dashboard-row {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-  
-  .dashboard-column {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-  
-  /* Make sure charts don't break */
-  .boxplot-container, 
-  .pie-chart-container, 
-  .map-container {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-  
-  /* Hide any elements that might cause page breaks */
-  .section-header {
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
 } 

@@ -19,7 +19,6 @@ async function generateDashboardPDF() {
         source: 'https://reporting-poc.netlify.app/',
         wait_for: 'pdfshiftReady', // Use the function defined in our setup
         landscape: true,           // Dashboards are typically better in landscape
-        use_print: true,           // Use print stylesheet - this will apply our @media print CSS
         delay: 2000,               // Add extra delay to ensure charts are fully rendered
         sandbox: true,             // Use sandbox mode to avoid using credits during testing
         
