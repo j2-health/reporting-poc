@@ -70,7 +70,8 @@ export const configurePDFShiftHighcharts = () => {
     }
   });
 
-  // Override the animate function
+  // Override the animate function - store original for reference but don't need to use it
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const originalAnimate = (Highcharts as any).SVGElement.prototype.animate;
   (Highcharts as any).SVGElement.prototype.animate = function () {
     // Skip animation completely
