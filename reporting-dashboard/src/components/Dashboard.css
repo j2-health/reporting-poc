@@ -4,19 +4,21 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  /* PDF optimization styles */
+  /* PDF optimization styles - Temporarily Commented Out
   page-break-inside: avoid;
   break-inside: avoid;
   max-height: none !important;
   overflow: visible !important;
-  /* Scale content to fit on one page */
   transform: scale(0.95);
   transform-origin: top left;
+  */
 }
 
 body {
+  /* Temporarily Commented Out
   margin: 0;
   padding: 0;
+  */
 }
 
 .dashboard-header {
@@ -68,7 +70,8 @@ body {
   background-color: #f0f0f0;
   padding: 10px 20px;
   border-left: 5px solid #2c3e50;
-  margin: 10px 0; /* Reduced margin for better PDF fit */
+  /* margin: 10px 0; /* Reduced margin for better PDF fit - Temporarily Commented Out */
+  margin: 20px 0 10px 0; /* Reverted to original margin */
 }
 
 .section-header h2 {
@@ -81,9 +84,10 @@ body {
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
-  /* PDF optimization styles */
+  /* PDF optimization styles - Temporarily Commented Out
   page-break-inside: avoid;
   break-inside: avoid;
+  */
 }
 
 .dashboard-column {
@@ -92,9 +96,10 @@ body {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  /* PDF optimization styles */
+  /* PDF optimization styles - Temporarily Commented Out
   page-break-inside: avoid;
   break-inside: avoid;
+  */
 }
 
 /* Specific styles for the map column */
@@ -104,13 +109,14 @@ body {
   overflow: hidden;
 }
 
-/* Chart containers - prevent page breaks */
+/* Chart containers - prevent page breaks - Temporarily Commented Out
 .boxplot-container, 
 .pie-chart-container, 
 .map-container {
   page-break-inside: avoid;
   break-inside: avoid;
 }
+*/
 
 .detail-item {
   display: flex;
@@ -202,4 +208,56 @@ body {
   width: 50px;
   height: 1px;
   background-color: #333;
+}
+
+/* Print-specific styles for PDF generation */
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dashboard-container {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    max-height: none !important;
+    overflow: visible !important;
+    transform: scale(0.95); /* Scale slightly for better fit on PDF page */
+    transform-origin: top left;
+    width: 100%; /* Ensure it uses full printable width */
+    box-shadow: none; /* Remove shadow for print */
+    padding: 0; /* Adjust padding for print if needed */
+    margin: 0;
+  }
+  
+  .dashboard-row,
+  .dashboard-column {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: none; /* Remove shadow for print */
+  }
+  
+  .boxplot-container, 
+  .pie-chart-container, 
+  .map-container {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  .section-header {
+    margin: 10px 0; /* Reduced margin for print */
+    padding: 5px 10px; /* Reduced padding for print */
+    border-left-width: 3px; /* Thinner border for print */
+  }
+
+  .dashboard-header {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* Hide elements not needed for PDF, if any. Example:
+  .some-interactive-button {
+    display: none;
+  }
+  */
 } 
