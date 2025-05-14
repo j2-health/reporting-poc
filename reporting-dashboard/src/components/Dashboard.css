@@ -175,4 +175,49 @@
   width: 50px;
   height: 1px;
   background-color: #333;
+}
+
+/* Print-specific styles to ensure the dashboard fits on a single page */
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dashboard-container {
+    /* Prevent page breaks within the dashboard */
+    page-break-inside: avoid;
+    break-inside: avoid;
+    /* Remove any height constraints */
+    max-height: none !important;
+    overflow: visible !important;
+    /* Scale down slightly to fit more content */
+    transform: scale(0.9);
+    transform-origin: top left;
+  }
+  
+  /* Prevent page breaks within dashboard sections */
+  .dashboard-row {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  .dashboard-column {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Make sure charts don't break */
+  .boxplot-container, 
+  .pie-chart-container, 
+  .map-container {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Hide any elements that might cause page breaks */
+  .section-header {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 } 

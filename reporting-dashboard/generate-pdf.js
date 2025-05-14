@@ -19,9 +19,20 @@ async function generateDashboardPDF() {
         source: 'https://reporting-poc.netlify.app/',
         wait_for: 'pdfshiftReady', // Use the function defined in our setup
         landscape: true,           // Dashboards are typically better in landscape
-        use_print: true,           // Use print stylesheet
+        use_print: true,           // Use print stylesheet - this will apply our @media print CSS
         delay: 2000,               // Add extra delay to ensure charts are fully rendered
-        sandbox: true              // Use sandbox mode to avoid using credits during testing
+        sandbox: true,             // Use sandbox mode to avoid using credits during testing
+        
+        // Use a larger page format
+        format: 'A3',             // Larger page format (A3 instead of default A4)
+        
+        // Reduce margins to maximize usable space
+        margin: {
+          top: "1cm",
+          right: "1cm",
+          bottom: "1cm",
+          left: "1cm"
+        }
       })
     });
 
@@ -32,7 +43,7 @@ async function generateDashboardPDF() {
     }
 
     // Save the PDF to file
-    const pdfFilename = 'dashboard.pdf';
+    const pdfFilename = 'dashboard-single-page.pdf';
     const fileStream = fs.createWriteStream(pdfFilename);
     
     response.body.pipe(fileStream);
